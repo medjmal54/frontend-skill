@@ -1,0 +1,8 @@
+# Skill runtime state — regenerated locally, never versioned
+.factory-cache/
+memories/
+
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
