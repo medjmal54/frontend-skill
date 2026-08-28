@@ -1,0 +1,286 @@
+## ⚡ Critical Instructions for the AI Runner
+
+- **Implicit Context Resolution (Mandatory Defaults)**: If any parameter below is left blank or omitted (e.g., visual personality, typography, colors, or dials), the AI **must not** prompt the user for clarification or fall back to generic presets (like Inter or simple blue gradients). Instead, **you must interpret the core concept from the project title/description and automatically determine the optimal aesthetic direction, color palette, typography stack, and dial settings (1–10)**.
+- **Creative Animations (`StringTune` Integration)**: For branding/creative landing pages, prefer integrating attribute-driven animations based on the `@fiddle-digital/string-tune` framework rules (e.g., custom cursor tracking, parallax offsets, progress loaders, and tactile button states governed by CSS variable overrides).
+
+---
+
+## Full Project Brief
+
+**Act as a senior frontend engineer and product designer.**
+
+Before writing any code, establish the design direction and architecture for this project:
+
+**Project:** [Product name and one-sentence description]
+
+**Type:** [Choose one: component | component-collection | ui-kit | landing-page | template | dashboard | existing-code-productization]
+
+**Audience:** [Who uses this? e.g., "B2B SaaS operators", "Creative professionals", "Enterprise admin users"]
+
+**Primary Goal:** [What is the user's main task? e.g., "Monitor real-time operations", "Create marketing content", "Manage inventory"]
+
+**Visual Personality:** [Choose 3-5 words, or leave blank for automatic inference based on target audience/category]
+
+**Dials Configuration:** [Optional. Specify DESIGN_VARIANCE, MOTION_INTENSITY, and VISUAL_DENSITY on a scale of 1-10. Leave blank to let the AI auto-configure these based on project type]
+
+**Interface Mode:** [brand-first | product-first | leave blank for auto-inference]
+
+**Key Constraint:** [Any specific limitation? e.g., "Zero dependencies", "Mobile-first", "Dark mode required", "Accessibility: WCAG 2.1 AAA"]
+
+**Out of Scope:** [What should NOT be included? e.g., "No dark mode", "Dashboard is not included", "No charts"]
+NOTE: Animation is NEVER out of scope. Every product must animate on every interaction.
+
+---
+
+## Data Display Preference (For Any Data-Heavy Product)
+
+If this product displays data (records, items, users, orders, metrics, etc.), choose a display pattern. Tables are NOT an option.
+
+**Display Pattern:** [Choose one or describe your own]
+- **Card Palette** — Grid of visual cards, each showing primary data + status/indicator. Click to inspect. Best for: browsable collections, items with status.
+- **Master-Detail Slide-Over** — Card palette on left, slide-over panel on right with full details + CRUD actions. Best for: management UIs, CRUD apps.
+- **Pipeline / Kanban** — Columns by status stage, cards move between them. Best for: workflows, status-driven data.
+- **Rich List** — Horizontal rows with avatar/icon, primary text, secondary text, status pill, inline actions. NOT a table. Best for: dense data, feeds.
+- **Metric Dashboard** — Large cards with sparklines, trend indicators, comparison periods. Best for: numeric/analytics data.
+
+**Data Visualization (Required for dashboards):**
+- [ ] Metric cards include sparklines showing trend data
+- [ ] At least one chart type: [line | bar | donut | area]
+- [ ] Charts animate on load (bars grow, lines draw, numbers count up)
+- [ ] SVG-based charts (no heavy charting library dependency)
+
+**Card Interactions:** [Confirm or customize]
+- Hover: card lifts with shadow + border glow
+- Click: card presses, opens detail view (slide-over or expand)
+- Quick actions: visible on hover or always visible?
+
+---
+
+## Layout Pattern (For App/Dashboard UIs)
+
+The default layout is:
+```
+Top navbar (logo + nav links + notifications + user avatar)
+  → Main content area (card palette, kanban, or metrics)
+    → Card click opens slide-over detail panel with CRUD actions
+```
+
+**No search inputs in the navbar.** If search is needed, use a dedicated search page or command palette (Cmd+K).
+
+**Layout:** [default | describe deviation if needed]
+- If you need a different layout, explain why here: [reason]
+
+---
+
+## Animation Preference
+
+Animation is mandatory. Every interaction must animate. Confirm or customize:
+
+**Animation Level:** [standard | expressive | landing-page | showcase]
+- **Standard (Recommended for dashboards):** All 16 interaction types from the animation checklist animate. Snappy, premium feel. 150-250ms state changes, staggered entrances, hover lifts.
+- **Expressive:** Same as standard + more pronounced hover effects, longer stagger, entrance choreography, micro-interactions on every element.
+- **Landing Page:** All standard animations PLUS scroll-triggered reveals, text masks, image reveals, parallax depth, magnetic CTAs, smooth scrolling.
+- **Showcase:** All landing page animations PLUS 3D transforms, custom cursor, full-section transitions, gradient animations.
+
+**Reduced Motion:** [yes (default) | no]
+- If yes: `prefers-reduced-motion` media query disables non-essential motion, keeps feedback instant and non-kinetic.
+
+---
+
+## Imagery Preference
+
+Every product must use real imagery. No empty colored boxes.
+
+**Imagery Level:** [minimal | standard | rich]
+- **Minimal:** Hero image + a few supporting photos. Clean, not image-heavy.
+- **Standard:** Hero image + section imagery + product screenshots or illustrations. Balanced visual content.
+- **Rich:** Full-bleed photography, parallax backgrounds, image-heavy sections. Visual storytelling.
+
+**Image Treatment:** [none | overlays | reveals | parallax | all]
+- **Overlays:** Gradient or color overlays on images for text readability
+- **Reveals:** Clip-path, scale mask, or blur-up animations on images
+- **Parallax:** Multi-layer depth scrolling on background images
+- **All:** Full treatment suite
+
+**Placeholder Strategy (for templates):** [unsplash | pexels | gradient-boxes]
+- Use real photo placeholders. Gradient boxes are NOT acceptable.
+
+---
+
+## Technology Stack
+
+The technology is determined by the product type:
+
+| Product Type | Technology |
+|---|---|
+| Single component | HTML + CSS + JS |
+| Component collection / pack | HTML + CSS + JS |
+| UI kit / Design system | React (Vite) |
+| Landing page / Template | React (Vite) |
+| Dashboard / Admin panel | React (Vite) |
+
+**Technology:** [auto-detect from type | specify override]
+
+---
+
+## Design Direction (fill out before any code)
+
+Using the design direction template from `design/design-direction.md`:
+
+**Concept:** [One to two sentences capturing the design idea, not features]
+
+**Typography:** [Families chosen, with rationale. Avoid: Inter, Roboto, Arial, Space Grotesk]
+
+**Color Palette:** [Primary color, neutral scale, semantic colors (success/warning/error/info). Avoid: purple/blue gradient on white]
+
+**Spacing & Density:** [comfortable | high-density | minimal]
+
+**Motion:** [How motion reinforces the personality. Brief = snappy spring? Elegant = smooth ease? Aggressive = fast snap? Specify timing feel, not just durations]
+
+**Responsive Behavior:** [How layouts restructure on mobile, tablet, desktop. Not just shrink. Cards should stack. Slide-over should become full-screen on mobile.]
+
+**Accessibility Target:** [WCAG 2.1 AA (standard) | WCAG 2.1 AAA (strict)]
+
+---
+
+## Anti-Slop Checklist
+
+Before proceeding, confirm ALL of these. A "No" on any = redesign before coding.
+
+### Identity
+- [ ] Is this a brand-first or product-first interface?
+- [ ] Would a designer identify this product's industry/audience from design alone?
+- [ ] Does at least one design choice surprise in a good way?
+
+### Visual Blacklists
+- [ ] Is the typeface something other than Inter, Roboto, Arial, or Space Grotesk?
+- [ ] Is the color scheme something other than purple/blue gradient on white?
+- [ ] Is the hero section something other than centered heading + paragraph + 2 buttons?
+- [ ] Are features presented asymmetrically, not as a 3-column card grid?
+
+### Imagery
+- [ ] Does every section have real imagery (not just colored boxes)?
+- [ ] Is the hero section visually rich (photo, illustration, or product UI)?
+- [ ] Are placeholder images from unsplash/pexels (not empty rectangles)?
+
+### Data Display
+- [ ] Are data displayed as cards, kanban, rich list, or metrics — NOT tables?
+- [ ] Is there a slide-over panel or detail view for inspecting individual records?
+- [ ] If dashboard: are there charts/graphs and sparklines on metric cards?
+
+### Layout
+- [ ] Is there a top navbar with navigation and user avatar (for app/dashboard UIs)?
+- [ ] Is there NO search input in the navbar?
+- [ ] Does the layout restructure on mobile, not just shrink?
+
+### Animation (Mandatory)
+- [ ] Do all cards/items animate on hover (lift + shadow)?
+- [ ] Do all buttons animate on hover and press?
+- [ ] Do lists/grids stagger in on page load?
+- [ ] Do modals/drawers/toasts animate open and closed?
+- [ ] Do state changes (loading, toggle, tab) animate?
+- [ ] Is prefers-reduced-motion handled?
+- [ ] If landing page: scroll reveals, text masks, image reveals present?
+
+### Content
+- [ ] Is demo content realistic (no Lorem ipsum, no "Feature 1")?
+- [ ] Are there no fake testimonials, metrics, or logos?
+
+---
+
+## Deliverables Checklist
+
+- [ ] Design direction brief (complete before coding)
+- [ ] Data display pattern chosen and implemented (cards, not tables)
+- [ ] Animation on all 16 interaction types from the checklist
+- [ ] [Component count] well-commented components with all states (default, hover, active, focus, disabled, loading, error, empty)
+- [ ] Responsive implementation (mobile, tablet, desktop — restructures, not shrinks)
+- [ ] Accessible implementation (WCAG 2.1 AA minimum, semantic HTML, keyboard operable, visible focus)
+- [ ] Demo/showcase with realistic content (not Lorem ipsum)
+- [ ] HTML documentation with installation, customization, component reference
+- [ ] Audit results: visual audit (animation + identity + layout), code audit, accessibility audit, responsive audit
+- [ ] [If selling] Marketplace package: documentation/, source-code/, screenshots/, changelog, license
+
+---
+
+## Next Steps
+
+1. Fill out this template completely
+2. I will establish the design direction and wait for your approval
+3. Once approved, I will implement with card-based data display and animation throughout
+4. I will run all quality audits (including animation coverage) before delivery
+
+**Ready to proceed?**
+
+---
+
+## Quick Prompts for Common Tasks
+
+### For a single component:
+```
+Create a [Component Name] component.
+Audience: [target user]
+Purpose: [what problem does it solve?]
+States: [list expected states]
+Use the design direction:
+- Personality: [words]
+- Typography: [family choices]
+- Color: [palette]
+- Motion: Must animate on hover, press, focus, and state changes.
+  Specify timing feel: [snappy/smooth/bold]
+```
+
+### For a collection:
+```
+Create a [Collection Name] component collection.
+Includes: [list of components]
+Shared system:
+- Design tokens: [yes/no, what's shared]
+- Responsive: [mobile-first | desktop-first]
+- Accessibility: [target level]
+- Animation: All components must animate on hover, press, focus,
+  and state changes. Staggered entrance for grid layouts.
+```
+
+### For a landing page:
+```
+Design a landing page for [product/service].
+Hero: [key message, visual anchor concept]
+Sections: [3-5 main sections with purpose]
+CTA: [primary action + secondary action]
+Avoid: [specific things to not do]
+Motion: Every section animates on scroll reveal (stagger).
+  Hero elements animate on load. CTAs animate on hover/press.
+  No static sections.
+```
+
+### For a dashboard / data-heavy UI:
+```
+Build a [dashboard type] for [product/service].
+Data to display: [list what the user sees]
+Display pattern: [card palette | kanban | metric dashboard | rich list]
+Layout: Top navbar + card grid + slide-over detail panel
+Navigation: [sidebar tabs | top tabs | segmented control]
+Actions: [what CRUD operations are needed]
+Animation: Cards hover-lift, click-opens-detail, stagger-entrance.
+  Slide-over animates in/out. Toasts for CRUD feedback.
+Avoid: Tables, boring pagination, static cards.
+```
+
+### For productizing existing code:
+```
+Productize this [existing project] for marketplace sale.
+Current state: [what exists]
+Problems to fix: [list specific issues]
+Target audience: [who is this for]
+Must preserve: [routes, form fields, etc.]
+Must add: Card-based data display (not tables), animation on all
+  interactions, top navbar with user avatar, slide-over for detail views.
+```
+
+---
+
+**Documentation:** Refer to the workflows/ directory for step-by-step guidance.
+**Quality gates:** Refer to the quality/ directory for audit checklists.
+**Design reference:** Refer to the design/ directory for rules and principles.
+**Animation reference:** Refer to design/motion.md for CSS recipes and the animation checklist.

@@ -1,0 +1,34 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "default_agent": "build",
+  "instructions": [],
+  "skills": {
+    "paths": [".opencode/skills"]
+  },
+  "agent": {
+    "design-reviewer": {
+      "description": "Reviews frontend products for visual design quality, anti-slop compliance, and design direction coherence. Use when auditing or reviewing visual design.",
+      "mode": "subagent",
+      "permission": {
+        "edit": "deny",
+        "bash": "ask"
+      }
+    },
+    "code-auditor": {
+      "description": "Audits frontend code for maintainability, design-system integrity, performance, and technical quality. Use when reviewing code quality or running code audits.",
+      "mode": "subagent",
+      "permission": {
+        "edit": "deny",
+        "bash": "ask"
+      }
+    },
+    "productizer": {
+      "description": "Transforms existing frontend code into marketplace-ready commercial products with documentation, packaging, and compliance. Use when productizing code for sale.",
+      "mode": "subagent",
+      "permission": {
+        "edit": "allow",
+        "bash": "ask"
+      }
+    }
+  }
+}
